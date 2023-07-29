@@ -21,10 +21,41 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:3317564504393514481",
+      "lastPropertyId": "4:4094973733591322570",
+      "name": "Person2",
+      "properties": [
+        {
+          "id": "1:3135051302578002",
+          "name": "personId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5112210807216445125",
+          "name": "nationalIdNumber",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:5473758415654850545"
+        },
+        {
+          "id": "3:6039689840133272955",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:4094973733591322570",
+          "name": "age",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:7372432614047728194",
-  "lastIndexId": "0:0",
+  "lastEntityId": "2:3317564504393514481",
+  "lastIndexId": "1:5473758415654850545",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
