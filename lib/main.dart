@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:objectbox_sample_app/models/objectbox.dart';
 import 'package:objectbox_sample_app/ui/home_screen.dart';
 import 'package:objectbox_sample_app/ui/query_screen.dart';
+import 'package:objectbox_sample_app/ui/relations_screen.dart';
 
 late ObjectBox objectbox;
 void main() async {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 130,
+                  width: 150,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
                   height: 15,
                 ),
                 SizedBox(
-                  width: 130,
+                  width: 150,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
@@ -85,6 +86,38 @@ class MyApp extends StatelessWidget {
                     },
                     child: const Text(
                       'Query Example',
+                      style: TextStyle(color: Colors.purple),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 216, 216, 216),
+                      ),
+                      shape: MaterialStateProperty.all(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RelationScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Relations Example',
                       style: TextStyle(color: Colors.purple),
                     ),
                   ),

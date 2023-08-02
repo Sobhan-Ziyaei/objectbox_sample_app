@@ -52,17 +52,68 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:8232796582027321161",
+      "lastPropertyId": "3:1720466795555456746",
+      "name": "MobilePhone",
+      "properties": [
+        {
+          "id": "1:8718851139220232281",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8145633037981347324",
+          "name": "modelName",
+          "type": 9
+        },
+        {
+          "id": "3:1720466795555456746",
+          "name": "ownerId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:5483346364824129990",
+          "relationTarget": "Person3"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:1383395875485676893",
+      "lastPropertyId": "2:8193505378004416885",
+      "name": "Person3",
+      "properties": [
+        {
+          "id": "1:8128050668334027415",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8193505378004416885",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:3317564504393514481",
-  "lastIndexId": "1:5473758415654850545",
+  "lastEntityId": "5:1383395875485676893",
+  "lastIndexId": "2:5483346364824129990",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    2965186645711582199
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    3543580690058663064,
+    5176975212773299051
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

@@ -14,8 +14,10 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'models/mobile_phone.dart';
 import 'models/person.dart';
 import 'models/person2.dart';
+import 'models/person3.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -68,7 +70,55 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[])
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 8232796582027321161),
+      name: 'MobilePhone',
+      lastPropertyId: const IdUid(3, 1720466795555456746),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8718851139220232281),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 8145633037981347324),
+            name: 'modelName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1720466795555456746),
+            name: 'ownerId',
+            type: 11,
+            flags: 520,
+            indexId: const IdUid(2, 5483346364824129990),
+            relationTarget: 'Person3')
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(5, 1383395875485676893),
+      name: 'Person3',
+      lastPropertyId: const IdUid(2, 8193505378004416885),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8128050668334027415),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 8193505378004416885),
+            name: 'name',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[
+        ModelBacklink(
+            name: 'phones', srcEntity: 'MobilePhone', srcField: 'owner')
+      ])
 ];
 
 /// Open an ObjectBox store with the model declared in this file.
@@ -91,13 +141,13 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 3317564504393514481),
-      lastIndexId: const IdUid(1, 5473758415654850545),
+      lastEntityId: const IdUid(5, 1383395875485676893),
+      lastIndexId: const IdUid(2, 5483346364824129990),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [2965186645711582199],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [3543580690058663064, 5176975212773299051],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -165,6 +215,71 @@ ModelDefinition getObjectBoxModel() {
               age: const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0));
 
           return object;
+        }),
+    MobilePhone: EntityDefinition<MobilePhone>(
+        model: _entities[2],
+        toOneRelations: (MobilePhone object) => [object.owner],
+        toManyRelations: (MobilePhone object) => {},
+        getId: (MobilePhone object) => object.id,
+        setId: (MobilePhone object, int id) {
+          object.id = id;
+        },
+        objectToFB: (MobilePhone object, fb.Builder fbb) {
+          final modelNameOffset = fbb.writeString(object.modelName);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, modelNameOffset);
+          fbb.addInt64(2, object.owner.targetId);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = MobilePhone(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              modelName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''));
+          object.owner.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          object.owner.attach(store);
+          return object;
+        }),
+    Person3: EntityDefinition<Person3>(
+        model: _entities[3],
+        toOneRelations: (Person3 object) => [],
+        toManyRelations: (Person3 object) => {
+              RelInfo<MobilePhone>.toOneBacklink(
+                      3, object.id, (MobilePhone srcObject) => srcObject.owner):
+                  object.phones
+            },
+        getId: (Person3 object) => object.id,
+        setId: (Person3 object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Person3 object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Person3(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''));
+          InternalToManyAccess.setRelInfo<Person3>(
+              object.phones,
+              store,
+              RelInfo<MobilePhone>.toOneBacklink(
+                  3, object.id, (MobilePhone srcObject) => srcObject.owner));
+          return object;
         })
   };
 
@@ -195,4 +310,28 @@ class Person2_ {
 
   /// see [Person2.age]
   static final age = QueryIntegerProperty<Person2>(_entities[1].properties[3]);
+}
+
+/// [MobilePhone] entity fields to define ObjectBox queries.
+class MobilePhone_ {
+  /// see [MobilePhone.id]
+  static final id =
+      QueryIntegerProperty<MobilePhone>(_entities[2].properties[0]);
+
+  /// see [MobilePhone.modelName]
+  static final modelName =
+      QueryStringProperty<MobilePhone>(_entities[2].properties[1]);
+
+  /// see [MobilePhone.owner]
+  static final owner =
+      QueryRelationToOne<MobilePhone, Person3>(_entities[2].properties[2]);
+}
+
+/// [Person3] entity fields to define ObjectBox queries.
+class Person3_ {
+  /// see [Person3.id]
+  static final id = QueryIntegerProperty<Person3>(_entities[3].properties[0]);
+
+  /// see [Person3.name]
+  static final name = QueryStringProperty<Person3>(_entities[3].properties[1]);
 }
